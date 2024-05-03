@@ -20,8 +20,8 @@
         <!-- MySQL DB dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- print all executed SQL on console -->
-        <!--<property name="hibernate.show_sql" >true </property>-->
-        <!-- <property name="hibernate.format_sql" >true </property>-->
+<!--        <property name="hibernate.show_sql" >true </property>-->
+<!--         <property name="hibernate.format_sql" >true </property>-->
 
         <!--   Mapping entity file -->
         <mapping class="sba.sms.models.Student"/>

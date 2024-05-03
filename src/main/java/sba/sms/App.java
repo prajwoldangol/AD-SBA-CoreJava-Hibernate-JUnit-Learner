@@ -49,8 +49,9 @@ public class App {
                 System.out.printf("Enter %s's password: ", email.substring(0, email.indexOf("@")));
                 String password = input.next();
                 if (studentService.validateStudent(email, password)) {
+                    Student studentByEmail = studentService.getStudentByEmail(email);
                     printStudentCourses(email);
-                    System.out.printf("select # from menu: %n1.Register %s to class: %n2.Logout%n", studentService.getStudentByEmail(email).getName());
+                    System.out.printf("select # from menu: %n1.Register %s to class: %n2.Logout%n", studentByEmail.getName());
                     userInput = input.nextInt();
                     if (userInput == 2) {
                         System.exit(0);
@@ -65,8 +66,12 @@ public class App {
                         System.out.print("select course #: ");
                         int courseId = input.nextInt();
                         if (courseId > 0 && courseId <= courseList.size()) {
+                            Course courseById = courseService.getCourseById(courseId);
                             studentService.registerStudentToCourse(email, (courseId));
-                            System.out.printf("successfully register %s to %s%n", studentService.getStudentByEmail(email).getName(), courseService.getCourseById(courseId).getName());
+                            if( ! studentByEmail.getCourses().contains(courseById)){
+                                System.out.printf("Successfully registered %s to %s%n", studentByEmail.getName(), courseById.getName());
+                            }
+
                             printStudentCourses(email);
                         } else {
                             System.out.printf("course id not found!%n");
