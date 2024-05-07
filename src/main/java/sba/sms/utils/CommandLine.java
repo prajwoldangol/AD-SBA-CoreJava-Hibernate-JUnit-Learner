@@ -34,6 +34,7 @@ public class CommandLine {
         StudentService studentService = new StudentService();
         CourseService courseService = new CourseService();
         studentService.createStudent(new Student("reema@gmail.com", "reema brown", PASSWORD));
+        studentService.createStudent(new Student("seema@gmail.com", "seema green", PASSWORD));
         studentService.createStudent(new Student("annette@gmail.com", "annette allen", PASSWORD));
         studentService.createStudent(new Student("anthony@gmail.com", "anthony gallegos", PASSWORD));
         studentService.createStudent(new Student("ariadna@gmail.com", "ariadna ramirez", PASSWORD));

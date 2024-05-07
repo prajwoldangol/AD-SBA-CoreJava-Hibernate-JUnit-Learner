@@ -27,11 +27,9 @@ public class StudentService implements StudentI {
         List<Student> students = new ArrayList<>();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
             students = session.createQuery("from Student").list();
-            transaction.commit();
+
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
             System.out.println(" Operation Failed  to get all students!!!");
         } finally {
             if (session != null) session.close();
@@ -48,7 +46,7 @@ public class StudentService implements StudentI {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
-            System.out.println(" Operation Failed while creating student !!!");
+            System.out.println(" Operation Failed while creating a new student !!!");
         } finally {
             if (session != null) session.close();
         }
@@ -59,11 +57,8 @@ public class StudentService implements StudentI {
         Student student = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
             student = session.get(Student.class, email);
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
             System.out.println(" Operation Failed  to get student by email : !!!");
         } finally {
             if (session != null) session.close();
@@ -111,17 +106,13 @@ public class StudentService implements StudentI {
         List<Course> courseList = new ArrayList<>();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
+//            Student student = session.createQuery("SELECT s from Student s where s.email=:email", Student.class).setParameter("email", email).getSingleResult();
             Student student = session.get(Student.class, email);
             if (student.getCourses() != null) {
                 courseList.addAll(student.getCourses());
             }
-            transaction.commit();
 
         } catch (Exception e) {
-            System.out.println(e);
-            System.out.println(e.getMessage());
-            if (transaction != null) transaction.rollback();
             System.out.println(" Operation Failed to get student courses : !!!");
         } finally {
             if (session != null) session.close();

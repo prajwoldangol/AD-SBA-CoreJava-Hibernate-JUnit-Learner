@@ -38,11 +38,8 @@ public class CourseService implements CourseI {
         Course course = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
             course = session.get(Course.class, courseId);
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
             System.out.println(" Operation Failed to get by course id !!!");
         } finally {
             if (session != null) session.close();
@@ -55,11 +52,8 @@ public class CourseService implements CourseI {
         List<Course> courses = new ArrayList<>();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
             courses = session.createQuery("from Course").list();
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
             System.out.println(" Operation Failed while getting all courses!!!");
         } finally {
             if (session != null) session.close();
